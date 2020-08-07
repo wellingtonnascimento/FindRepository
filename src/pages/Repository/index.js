@@ -73,47 +73,6 @@ export default class Repository extends Component {
           <h1>{repository.name}</h1>
           <p>{repository.description}</p>
         </Owner>
-
-        <IssueList>
-          <IssueFilter active={filterIndex}>
-            {filters.map((filter, index) => (
-              <button
-                type="button"
-                key={filter.label}
-                onClick={() => this.handleFilterClick(index)}
-              >
-                {filter.label}
-              </button>
-            ))}
-          </IssueFilter>
-          {issues.map(issue => (
-            <li key={String(issue.id)}>
-              <img src={issue.user.avatar_url} alt={issue.user.login} />
-              <div>
-                <strong>
-                  <a href={issue.html_url}>{issue.title}</a>
-                  {issue.labels.map(label => (
-                    <span key={String(label.id)}>{label.name}</span>
-                  ))}
-                </strong>
-                <p>{issue.user.login}</p>
-              </div>
-            </li>
-          ))}
-        </IssueList>
-        <PageActions>
-          <button
-            type="button"
-            disabled={page < 2}
-            onClick={() => this.handlePage('back')}
-          >
-            Anterior
-          </button>
-          <span>Página {page}</span>
-          <button type="button" onClick={() => this.handlePage('next')}>
-            Próximo
-          </button>
-        </PageActions>
       </Container>
     );
   }
