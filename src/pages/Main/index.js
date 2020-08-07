@@ -12,6 +12,23 @@ class Main extends Component {
     loading: false,
   };
 
+  // carregar dados localStorage
+  componentDidMount() {
+    const repositories = localStorage.getItem('repositories');
+
+    if (repositories) {
+      this.setState({ repositories: JSON.parse(repositories) });
+    }
+  }
+
+  //salvar dados do localStorage
+  componentDidUpdate(_, prevState) {
+    const { repositories } = this.state;
+    if (prevState.repositories !== repositories) {
+      localStorage.setItem('repositories', JSON.stringify(repositories));
+    }
+  }
+
   handleInputChange = (e) => {
     this.setState({ newRepo: e.target.value });
   };
