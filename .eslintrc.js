@@ -3,6 +3,11 @@ module.exports = {
     es2020: true,
   },
   extends: ['plugin:react/recommended', 'airbnb', 'prettier', 'prettier/react'],
+  globals: {
+    Atomic: 'readonly',
+    SheredArrayBuffer: 'readonly',
+    __DEV__: 'readonly',
+  },
   parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
