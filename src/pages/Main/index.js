@@ -24,23 +24,26 @@ export default class Main extends Component {
   };
 
   handleAddUser = async () => {
-    const { users, newUser } = this.state;
+    try {
+      const { users, newUser } = this.state;
+      const response = await api.get(`/users/${newUser}`);
 
-    const response = await api.get(`/users/${newUser}`);
+      const data = {
+        name: response.data.name,
+        login: response.data.login,
+        bio: response.data.bio,
+        avatar: response.data.avatar_url,
+      };
 
-    const data = {
-      name: response.data.name,
-      login: response.data.login,
-      bio: response.data.bio,
-      avatar: response.data.avatar,
-    };
+      this.setState({
+        users: [...users, data],
+        newUser: '',
+      });
 
-    this.setState({
-      users: [...users, data],
-      newUser: '',
-    });
-
-    Keyboard.dismiss();
+      Keyboard.dismiss();
+    } catch (error) {
+      console.tron.log(error);
+    }
   };
 
   render() {
